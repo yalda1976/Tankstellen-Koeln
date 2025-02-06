@@ -84,6 +84,15 @@ Change these values inside the **PHP template file**.
 
 ---
 
+🆕 Changelog
+v1.2 – Latest Release
+✅ Fixed: Column layout issue in Gutenberg editor
+
+v1.1
+✅ Added: Search & sorting functionality
+
+---
+
 ## 🤝 **Contributing**
 We welcome contributions! Please follow the [Development](#development) steps and submit a **Pull Request (PR)**.
 
