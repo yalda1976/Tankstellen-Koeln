@@ -3,7 +3,7 @@
 Plugin Name: Tankstellen Köln
 Plugin URI: https://github.com/yalda1976/Tankstellen-Koeln
 Description: WordPress-Plugin zur Darstellung von Tankstellen-Daten mit Bootstrap Cards
-Version: 1.0
+Version: 1.1
 Author: Yalda
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -139,7 +139,11 @@ function tankstellen_render_callback( $attributes ) {
 	$borderRadius = isset( $attributes['borderRadius'] ) ? (int) $attributes['borderRadius'] : 5;
 
 	// Adjust column class based on number of columns.
-	$columnClass = ( $columns === 1 ) ? 'col-12' : ( ( $columns === 2 ) ? 'col-md-6' : 'col-md-4' );
+	//$columnClass = ( $columns === 1 ) ? 'col-12' : ( ( $columns === 2 ) ? 'col-md-6' : 'col-md-4' );
+$columnClass = ($columns == 1) ? 'col-12' : 
+              (($columns == 2) ? 'col-md-6' : 
+              (($columns == 3) ? 'col-md-4' : 'col-lg-3'));
+
 
 	// Begin building the output HTML.
 	$output = '<div class="tankstellen-block container mt-4">';
@@ -159,14 +163,14 @@ function tankstellen_render_callback( $attributes ) {
 	// Loop through each station and create a card.
 	foreach ( $stations as $station ) {
     $output .= sprintf(
-        '<div data-type="wp-bootstrap-blocks/column" class="%s col-12 col-sm-6 col-md-4 col-lg-3 mb-4 station-card" data-name="%s">
-            <div class="card h-100" style="background-color: %s; color: %s; padding: %dpx; border-radius: %dpx;">
-                <div class="card-body p-4">
-                    <h5 class="card-title mb-3" style="color: %s; font-size: %dpx;">%s</h5>
-                    <p class="card-text" style="color: %s; font-size: %dpx;">x: (%s<br> y: %s)</p>
-                </div>
+    '<div data-type="wp-bootstrap-blocks/column" class="%s station-card mb-4" data-name="%s">
+        <div class="card h-100" style="background-color: %s; color: %s; padding: %dpx; border-radius: %dpx;">
+            <div class="card-body p-4">
+                <h5 class="card-title mb-3" style="color: %s; font-size: %dpx;">%s</h5>
+                <p class="card-text" style="color: %s; font-size: %dpx;">x: (%s, y: %s)</p>
             </div>
-        </div>',
+        </div>
+    </div>',
         esc_attr( $columnClass ),
         esc_attr( $station['adresse'] ),
         esc_attr( $cardColor ),
